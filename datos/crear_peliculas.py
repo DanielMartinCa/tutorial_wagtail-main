@@ -16,20 +16,21 @@ for p in Pelicula.objects.all():
     '''
 #lista de películas del json
 
-pelis = json.load(open("datos/datos_pelis.json"))
+pelis = json.load(open("datos_pelis_plus.json"))
    
 
 for p1 in pelis:
     p = Pelicula()
     p.title = p1["titulo"]
-    p.rating = 0 #p1["rating"]
+    p.rating = p1["rating"].replace(',','.')
     p.link = "https://www.imdb.com" + p1["url"]
-    p.place = 0 #p1["place"]
+    p.place = p1["ranking"]
     year = p1["year"]
     if year.isdigit():
         p.year = p1["year"]
     else:
         p.year = 0
-    p.imagen = p1["img"][0]
+    p.imagen = p1["img"]
     p.cast = p1['cast']
+    p.genre = p1['genre']
     p.save()

@@ -24,6 +24,7 @@ class Pelicula(models.Model):
     imagen = models.URLField()
     cast = models.CharField(max_length = 250, 
         help_text='Introduzca nombres separados por comas')
+    genre = models.CharField(max_length=250, blank=True)
 
     panels = [
         FieldPanel('title'),
@@ -32,7 +33,8 @@ class Pelicula(models.Model):
         FieldPanel('place'),
         FieldPanel('year'),
         FieldPanel('imagen'),
-        FieldPanel('cast')
+        FieldPanel('cast'),
+        FieldPanel('genre'),
     ]
     def __str__(self):
         return f'{self.title} ({self.year})'
