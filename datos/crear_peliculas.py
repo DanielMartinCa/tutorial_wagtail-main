@@ -1,4 +1,5 @@
 from pelis.models import Pelicula
+from django.utils.text import slugify
 import json
 import os
 
@@ -16,7 +17,10 @@ for p in Pelicula.objects.all():
     '''
 #lista de películas del json
 
-pelis = json.load(open("datos_pelis_plus.json"))
+if os.path.exists("datos/datos_pelis_plus.json"):
+    pelis = json.load(open("datos/datos_pelis_plus.json"))
+else:
+    pelis = json.load(open("datos_pelis_plus.json"))
    
 
 for p1 in pelis:
@@ -32,5 +36,5 @@ for p1 in pelis:
         p.year = 0
     p.imagen = p1["img"]
     p.cast = p1['cast']
-    p.genre = p1['genre']
+    p.slug = slugify(f'{p.title} ({p.year})')
     p.save()

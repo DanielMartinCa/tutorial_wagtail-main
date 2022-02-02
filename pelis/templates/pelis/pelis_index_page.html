@@ -16,5 +16,15 @@
 <ul>
     <li> <img src="{{pelis.imagen}}"> {{ pelis.title}}</li>
 </ul>
+
 {% endfor %}
+{% if peliculas.paginator.count > 1 %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                {% include "includes/pagination.html" with subpages=peliculas %}
+                </div>
+            </div>
+        </div>
+{% endif %}
 {% endblock content %}
